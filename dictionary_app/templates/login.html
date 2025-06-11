@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <style>
+        button[type="submit"] {
+            font-size: 18px;
+            font-family: 'Estedad';
+        }
+        span {
+            font-weight: bold;
+        }
+        input {
+            font-family: 'Estedad';
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <nav>
+        <nav class="navbar">
+            <ul>
+                <li><span class="theme-switch">
+                    <span>تغییر تم</span>
+                    <label class="switch">
+                        <input type="checkbox" id="theme-switch">
+                        <span class="slider"></span>
+                    </label>
+                </span></li>
+            </ul>
+        </nav>
+    </nav>
+    <main>
+        <div class="container">
+            <h1>ورود</h1>
+            <form id="login-form" method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                <label for="username">نام کاربری:</label>
+                <input type="text" id="username" name="username" placeholder="نام کاربری خود را وارد کنید" required>
+    
+                <label for="password">رمز عبور:</label>
+                <input type="password" id="password" name="password" placeholder="رمز عبور خود را وارد کنید" required>
+    
+                <!-- CAPTCHA Section -->
+                <div class="captcha-code">
+                    <label id="CAPTCHA">کپچا:</label>
+                    <div class="captcha-code" id="captchaCode">{{ captcha }}</div>
+                    <span class="captcha-refresh" onclick="generateCaptcha()">↻</span>
+                </div>
+                <br>
+                <input type="text" id="captchaInput" name="captcha" placeholder="کد بالا را وارد کنید" required>
+                <br><br>
+                <button type="submit" class="btn">ورود</button>
+            </form>
+            <br>
+            <hr>
+            <div class="links">
+                <p>حساب کاربری ندارید؟ <a href="{% url 'register' %}">ثبت‌نام کنید</a></p>
+                <p>رمز عبور خود را فراموش کرده‌اید؟ <a href="{% url 'reset_password.html' %}">بازیابی رمز عبور</a></p>
+            </div>
+        </div>
+    </main>
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>
